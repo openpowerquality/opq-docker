@@ -22,13 +22,23 @@ services:
       - ROOT_URL=${VIEW_ROOT_URL}
       - PORT=${VIEW_PORT}
       - METEOR_SETTINGS
+  makai:
+    image: ${MAKAI_IMAGE}
+    depends_on:
+      - mongo
+    restart: always
+    ports:
+      - "9880:9880"
+      - "8196:8196"
+      - "8194:8194"
+    volumes:
+      - "${MAKAI_VOLUME}:${MAKAI_VOLUME}"
   mauka:
     image: ${MAUKA_IMAGE}
     depends_on:
       - mongo
+      - makai
     restart: always
-    extra_hosts:
-      - "dockerhostnet:${DOCKER_HOST_IP}"
     ports:
       - "9883:9883"
       - "9882:9882"
@@ -53,6 +63,7 @@ services:
     depends_on:
       - mongo
       - mauka
+      - makai
       - view
     restart: always
     extra_hosts:
