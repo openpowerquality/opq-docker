@@ -54,6 +54,8 @@ services:
       - "8194:8194"
     volumes:
       - "${MAKAI_VOLUME}:${MAKAI_VOLUME}"
+    environment:
+      - MAKAI_SETTINGS
   mauka:
     image: ${MAUKA_IMAGE}
     depends_on:
