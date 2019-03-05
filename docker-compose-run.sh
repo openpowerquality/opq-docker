@@ -10,6 +10,8 @@ export METEOR_SETTINGS=$(cat ./config/view/view.config.json)
 
 # Makai Config Environment Var
 export MAKAI_SETTINGS=$(cat ./config/makai/makai.config.json)
+export ACQUISITION_BROKER_SETTINGS=$(cat ./config/makai/acquisition_broker.config.json)
+export TRIGGERING_BROKER_SETTINGS=$(cat ./config/makai/triggering_broker.config.json)
 
 # Mauka Config Environment Var
 export MAUKA_SETTINGS=$(cat ./config/mauka/mauka.config.json)

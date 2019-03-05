@@ -57,6 +57,8 @@ services:
       - "${MAKAI_VOLUME}:${MAKAI_VOLUME}"
     environment:
       - MAKAI_SETTINGS
+      - ACQUISITION_BROKER_SETTINGS
+      - TRIGGERING_BROKER_SETTINGS
   mauka:
     image: ${MAUKA_IMAGE}
     depends_on:
