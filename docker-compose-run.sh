@@ -11,5 +11,8 @@ export METEOR_SETTINGS=$(cat ./config/view/view.config.json)
 # Makai Config Environment Var
 export MAKAI_SETTINGS=$(cat ./config/makai/makai.config.json)
 
+# Mauka Config Environment Var
+export MAUKA_SETTINGS=$(cat ./config/mauka/mauka.config.json)
+
 # Startup Docker-Compose. Note: Be sure that docker-compose.yml is same directory as this script.
 docker-compose up -d --remove-orphans
