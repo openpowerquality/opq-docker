@@ -53,6 +53,7 @@ services:
       - "8196:8196"
       - "8194:8194"
       - "9881:9881"
+      - "127.0.0.1:8080:8080"
     volumes:
       - "${MAKAI_VOLUME}:${MAKAI_VOLUME}"
     environment:
