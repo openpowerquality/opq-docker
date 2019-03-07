@@ -17,7 +17,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8007:8007"
     volumes:
       - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt
