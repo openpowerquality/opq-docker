@@ -10,6 +10,7 @@ services:
       - "127.0.0.1:${MONGO_PORT}:${MONGO_PORT}"
     volumes:
       - "${MONGO_VOLUME}:/data/db"
+    container_name: opq-mongo
   nginx:
     image: ${NGINX_IMAGE}
     depends_on:
@@ -53,6 +54,8 @@ services:
       - "8194:8194"
       - "9881:9881"
       - "127.0.0.1:8080:8080"
+      - "127.0.0.1:9899:9899"
+      - "127.0.0.1:9884:9884"
     volumes:
       - "${MAKAI_VOLUME}:${MAKAI_VOLUME}"
     environment:
