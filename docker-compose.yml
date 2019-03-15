@@ -72,6 +72,8 @@ services:
       - "9883:9883"
       - "9882:9882"
       - "12000:12000"
+    volumes:
+      - /:/hostfs:ro
     environment:
       - MAUKA_SETTINGS
   health:
