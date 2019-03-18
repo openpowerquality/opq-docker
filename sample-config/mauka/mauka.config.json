@@ -1,8 +1,12 @@
 {
   "mauka.debug": true,
+  "mauka.debug.plugins": ["MakaiEventPlugin", "StatusPlugin"],
+  "mauka.startEventBroker": true,
+  "mauka.startPubSubBroker": true,
+  "mauka.startPlugins": true,
 
-  "zmq.event.interface"           : "tcp://makai:10000",
-  "zmq.trigger.interface"         : "tcp://makai:9899",
+  "zmq.event.interface"           : "tcp://localhost:10000",
+  "zmq.trigger.interface"         : "tcp://localhost:9899",
   "zmq.mauka.broker.pub.interface": "tcp://*:9883",
   "zmq.mauka.broker.sub.interface": "tcp://*:9882",
   "zmq.mauka.plugin.pub.interface": "tcp://localhost:9882",
@@ -11,11 +15,11 @@
   "zmq.mauka.plugin.management.rep.interface": "tcp://*:12000",
   "zmq.mauka.plugin.management.req.interface": "tcp://localhost:12000",
 
-  "mongo.host": "mongo",
-  "mongo.port": 21017,
+  "mongo.host": "localhost",
+  "mongo.port": 27017,
   "mongo.db": "opq",
 
-  "plugins.base.heartbeatIntervalS": 15.0,
+  "plugins.base.heartbeatIntervalS": 60.0,
 
   "plugins.IticPlugin.segment.threshold.rms": 0.1,
 
@@ -46,5 +50,15 @@
 
   "plugins.StatusPlugin.port": 8911,
 
-  "plugins.SystemStatsPlugin.intervalS": 3600
+  "plugins.SystemStatsPlugin.intervalS": 60,
+
+  "laha.config.default": {
+    "ttls": {
+      "box_samples": 900,
+      "measurements": 86400,
+      "trends": 604800,
+      "events": 2592000,
+      "incidents": 31536000
+    }
+  }
 }
