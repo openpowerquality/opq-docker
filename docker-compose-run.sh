@@ -6,7 +6,7 @@
 # See: https://docs.docker.com/compose/compose-file/#variable-substitution
 
 # Nginx Config Environment Var
-. ./sample-config/nginx/nginx.env
+. ./config/nginx/nginx.env
 export NGINX_SERVER_NAME
 
 # View Config Environment Var
