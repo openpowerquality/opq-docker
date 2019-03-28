@@ -5,6 +5,10 @@
 # substitutes them into the docker-compose.yml configuration file.
 # See: https://docs.docker.com/compose/compose-file/#variable-substitution
 
+# Nginx Config Environment Var
+. ./sample-config/nginx/nginx.env
+export NGINX_SERVER_NAME
+
 # View Config Environment Var
 export METEOR_SETTINGS=$(cat ./config/view/view.config.json)
 

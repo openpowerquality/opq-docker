@@ -1,0 +1,74 @@
+upstream view_app {
+    server view:${NGINX_VIEW_PORT};
+}
+
+upstream boxupdateserver_health_server {
+    server boxupdateserver:8151;
+}
+
+map ${DOLLAR}http_upgrade ${DOLLAR}connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 80;
+    server_name ${NGINX_SERVER_NAME};
+    server_tokens off;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://${DOLLAR}host${DOLLAR}request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name ${NGINX_SERVER_NAME};
+    server_tokens off;
+
+    ssl_certificate /etc/letsencrypt/live/${NGINX_SERVER_NAME}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${NGINX_SERVER_NAME}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+
+    client_max_body_size 10M;
+
+    # View Proxy
+    location / {
+        proxy_pass  http://view_app/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade ${DOLLAR}http_upgrade;
+        proxy_set_header Connection ${DOLLAR}connection_upgrade;
+        proxy_set_header Host ${DOLLAR}http_host;
+
+        proxy_set_header X-Real-IP ${DOLLAR}remote_addr;
+        proxy_set_header X-Forwarded-For ${DOLLAR}proxy_add_x_forwarded_for;
+        proxy_set_header X-Forward-Proto ${DOLLAR}scheme;
+        proxy_set_header X-Nginx-Proxy true;
+
+        proxy_redirect off;
+
+        proxy_connect_timeout 43200s;
+        proxy_read_timeout    43200s;
+        proxy_send_timeout    43200s;
+    }
+
+    # Box Updater Server Proxy
+    location /box-update-server/ {
+        proxy_pass  http://boxupdateserver_health_server/;
+        proxy_redirect ~^/(.*) http://${DOLLAR}http_host/box-update-server/${DOLLAR}1;
+        proxy_http_version 1.1;
+        proxy_set_header Host ${DOLLAR}http_host;
+
+        proxy_set_header X-Real-IP ${DOLLAR}remote_addr;
+        proxy_set_header X-Forwarded-For ${DOLLAR}proxy_add_x_forwarded_for;
+        proxy_set_header X-Forward-Proto ${DOLLAR}scheme;
+        proxy_set_header X-Nginx-Proxy true;
+    }
+}
