@@ -1,10 +1,16 @@
 #!/bin/bash
 
-domains=(emilia.ics.hawaii.edu)
+# Source the nginx.env file so we can use its variables here
+. ./config/nginx/nginx.env
+
+# Configurable Variables
+domains=("$NGINX_SERVER_NAME")
+email="$LETSENCRYPT_EMAIL" # Adding a valid address is strongly recommended
+staging="$LETSENCRYPT_STAGING_MODE" # Set to 1 if testing your setup to avoid hitting request limits
+
+# Do not touch anything else below unless you really know what you're doing!
 rsa_key_size=4096
 data_path="./data/certbot"
-email="aghalarp@hawaii.edu" # Adding a valid address is strongly recommended
-staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if [ -d "$data_path" ]; then
   read -p "Existing data found for $domains. Continue and replace existing certificate? (y/N) " decision
