@@ -15,6 +15,7 @@ services:
     image: ${NGINX_IMAGE}
     depends_on:
       - view
+      - boxupdateserver
     ports:
       - "80:80"
       - "443:443"

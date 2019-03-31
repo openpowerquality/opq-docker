@@ -40,7 +40,8 @@ echo
 
 
 echo "### Starting nginx ..."
-docker-compose up --force-recreate -d nginx
+#docker-compose up --force-recreate -d nginx
+docker-compose down && . ./docker-compose-run.sh
 echo
 
 echo "### Deleting dummy certificate for $domains ..."
