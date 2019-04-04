@@ -67,6 +67,7 @@ services:
       - MAKAI_SETTINGS
       - ACQUISITION_BROKER_SETTINGS
       - TRIGGERING_BROKER_SETTINGS
+      - RUST_BACKTRACE=1
   mauka:
     image: ${MAUKA_IMAGE}
     depends_on:
