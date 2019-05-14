@@ -98,6 +98,8 @@ services:
       - MAKAI_PUSH_URL=${HEALTH_MAKAI_PUSH_URL}
       - MAKAI_SUB_URL=${HEALTH_MAKAI_SUB_URL}
       - MAKAI_HEALTH_URL=${HEALTH_MAKAI_HEALTH_URL}
+      - RUST_BACKTRACE=1
+      - RUST_LOG=info
     volumes:
       - /tmp/opqhealth:/var/log/health
   boxupdateserver:
