@@ -17,6 +17,7 @@ export MAKAI_SETTINGS=$(cat ./config/makai/makai.config.json)
 export ACQUISITION_BROKER_SETTINGS=$(cat ./config/makai/acquisition_broker.config.json)
 export TRIGGERING_BROKER_SETTINGS=$(cat ./config/makai/triggering_broker.config.json)
 export BOX_UPDATE_SERVER_SETTINGS=$(cat ./config/box-update-server/box-update-server.config.json)
+export HEALTH_SETTINGS=$(cat ./config/health/health.config.json)
 
 # Mauka Config Environment Var
 export MAUKA_SETTINGS=$(cat ./config/mauka/mauka.config.json)
