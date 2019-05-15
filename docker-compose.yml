@@ -90,6 +90,10 @@ services:
       - makai
       - view
     restart: always
+    expose:
+      - 28420
+    ports:
+      - 28420:28420
     environment:
       - HEALTH_SETTINGS
       - MONGO_URL=mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}
