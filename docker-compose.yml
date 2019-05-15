@@ -91,6 +91,7 @@ services:
       - view
     restart: always
     environment:
+      - HEALTH_SETTINGS
       - MONGO_URL=mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}
       - VIEW_URL=${HEALTH_VIEW_URL}
       - BOX_URL=${HEALTH_BOX_URL}
