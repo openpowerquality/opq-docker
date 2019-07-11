@@ -17,8 +17,20 @@ if [ -d "$data_path" ]; then
   if [ "$decision" != "Y" ] && [ "$decision" != "y" ]; then
     exit
   fi
+
+  # Re-create data path directory to ensure that it is owned by the current user
+  echo "Deleting existing files in $data_path. Sudo is used in case the $data_path files are owned by root, which can occur if Docker Compose has already been previously spun-up prior to running this script."
+  sudo rm -rf "$data_path"
 fi
 
+# Create data path directory
+mkdir -p "$data_path"
+
+# If SELinux is enabled and enforced on the current system, label the directory with the 'container_file_t' policy type.
+if [ $(sestatus | awk '/SELinux status:/ {print $3}') == "enabled" ] && [ $(sestatus | awk '/Current mode:/ {print $3}') == "enforcing" ]; then
+  echo "SELinux is enabled! Labeling $data_path with the container_file_t policy type."
+  chcon -R -t container_file_t "$data_path"
+fi
 
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then
   echo "### Downloading recommended TLS parameters ..."
