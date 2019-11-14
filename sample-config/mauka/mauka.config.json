@@ -14,6 +14,8 @@
   "zmq.mauka.plugin.pub.interface": "tcp://localhost:9882",
   "zmq.mauka.plugin.sub.interface": "tcp://localhost:9883",
 
+  "zmq.incident_id_provider.interface": "tcp://localhost:9777",
+
   "zmq.mauka.plugin.management.rep.interface": "tcp://*:12000",
   "zmq.mauka.plugin.management.req.interface": "tcp://localhost:12000",
 
@@ -26,8 +28,9 @@
   "plugins.IticPlugin.segment.threshold.rms": 0.1,
 
   "plugins.FrequencyVariationPlugin.frequency.ref": 60.0,
-  "plugins.FrequencyVariationPlugin.frequency.variation.threshold.low": 0.1,
-  "plugins.FrequencyVariationPlugin.frequency.variation.threshold.high": 0.1,
+  "plugins.FrequencyVariationPlugin.frequency.variation.threshold.low": 59.75,
+  "plugins.FrequencyVariationPlugin.frequency.variation.threshold.high": 60.25,
+  "plugins.FrequencyVariationPlugin.min_incident_len_c": 2,
   "plugins.FrequencyVariationPlugin.frequency.interruption": 58.0,
   "plugins.FrequencyVariationPlugin.max.lull.windows": 3,
 
